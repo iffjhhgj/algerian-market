@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>تسجيل الدخول - الجريان ماركت</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="login-body">
+
+    <div class="login-box">
+        <h2>تسجيل الدخول</h2>
+
+        <button class="google-btn">
+            <img src="https://img.icons8.com/color/48/google-logo.png">
+            تسجيل الدخول باستخدام Google
+        </button>
+
+        <button class="facebook-btn">
+            <img src="https://img.icons8.com/color/48/facebook-new.png">
+            تسجيل الدخول باستخدام Facebook
+        </button>
+
+        <p class="note">هذه مجرد نسخة تجريبية – لم يتم تفعيل الدخول الحقيقي بعد.</p>
+    </div>
+
+</body>
+</html>
+<script>
+document.querySelector(".google-btn").onclick = () => {
+    alert("سيتم إضافة تسجيل الدخول بـ Google لاحقاً (OAuth).");
+}
+
+document.querySelector(".facebook-btn").onclick = () => {
+    alert("سيتم إضافة تسجيل الدخول بـ Facebook لاحقاً (OAuth).");
+}
+</script>
+<!-- Firebase SDK -->
+<script type="module">
+  // Import the functions
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+  import { getAuth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+
+  // Firebase config
+  const firebaseConfig = {
+    apiKey: "AIzaSyDDgyhYO3PyEb4Vw3N8EMyB3UrIarJkXXw",
+    authDomain: "algerian-market.firebaseapp.com",
+    projectId: "algerian-market",
+    storageBucket: "algerian-market.firebasestorage.app",
+    messagingSenderId: "494532117214",
+    appId: "1:494532117214:web:c91c0b3d4e96589e24384f",
+    measurementId: "G-8H90VHTDLG"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  // Google Login
+  const googleProvider = new GoogleAuthProvider();
+  document.querySelector(".google-btn").addEventListener("click", () => {
+    signInWithPopup(auth, googleProvider)
+      .then((result) => {
+        const user = result.user;
+        alert("تم تسجيل الدخول باسم: " + user.displayName);
+        // يمكنك إعادة التوجيه لصفحة أخرى هنا
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("حدث خطأ أثناء تسجيل الدخول بـ Google");
+      });
+  });
+
+  // Facebook Login
+  const facebookProvider = new FacebookAuthProvider();
+  document.querySelector(".facebook-btn").addEventListener("click", () => {
+    signInWithPopup(auth, facebookProvider)
+      .then((result) => {
+        const user = result.user;
+        alert("تم تسجيل الدخول باسم: " + user.displayName);
+        // يمكنك إعادة التوجيه لصفحة أخرى هنا
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("حدث خطأ أثناء تسجيل الدخول بـ Facebook");
+      });
+  });
+</script>
