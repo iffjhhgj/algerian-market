@@ -338,4 +338,9 @@ body {
     font-size: 14px;
     margin-top: 10px;
 }
+@media (max-width: 600px) {
+  .logo {
+    max-width: 120px;
+  }
+}
 
