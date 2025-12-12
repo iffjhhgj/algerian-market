@@ -343,4 +343,9 @@ body {
     max-width: 120px;
   }
 }
+.logo {
+  max-width: 150px;   /* الحجم على الهاتف */
+  width: 100%;
+  height: auto;
+}
 
