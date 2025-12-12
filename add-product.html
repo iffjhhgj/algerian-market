@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>إضافة منتج - الجريان ماركت</title>
+<link rel="stylesheet" href="styles.css">
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+import { getFirestore, addDoc, collection } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "YOUR_KEY",
+  authDomain: "algerian-market.firebaseapp.com",
+  projectId: "algerian-market",
+  storageBucket: "algerian-market.appspot.com",
+  messagingSenderId: "494532117214",
+  appId: "1:494532117214:web:c91c0b3d4e96589e24384f"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+async function addProduct(event) {
+  event.preventDefault();
+
+  const name = document.getElementById("productName").value;
+  const price = document.getElementById("productPrice").value;
+  const description = document.getElementById("productDesc").value;
+
+  await addDoc(collection(db, "products"), {
+    name,
+    price,
+    description,
+    createdAt: new Date()
+  });
+
+  alert("تم إضافة المنتج بنجاح!");
+}
+
+window.addProduct = addProduct;
+</script>
+</head>
+<body>
+
+<h1>إضافة منتج</h1>
+
+<form onsubmit="addProduct(event)">
+  <input id="productName" type="text" placeholder="اسم المنتج" required>
+  <input id="productPrice" type="number" placeholder="السعر" required>
+  <textarea id="productDesc" placeholder="وصف المنتج" required></textarea>
+  <button type="submit">إضافة المنتج</button>
+</form>
+
+</body>
+</html>

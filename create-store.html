@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>إنشاء متجر - الجريان ماركت</title>
+<link rel="stylesheet" href="styles.css">
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "YOUR_KEY",
+  authDomain: "algerian-market.firebaseapp.com",
+  projectId: "algerian-market",
+  storageBucket: "algerian-market.appspot.com",
+  messagingSenderId: "494532117214",
+  appId: "1:494532117214:web:c91c0b3d4e96589e24384f"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+async function createStore(event) {
+  event.preventDefault();
+
+  const name = document.getElementById("storeName").value;
+  const email = document.getElementById("storeEmail").value;
+  const description = document.getElementById("storeDesc").value;
+
+  await addDoc(collection(db, "stores"), {
+    name,
+    email,
+    description,
+    createdAt: new Date()
+  });
+
+  alert("تم إنشاء المتجر بنجاح!");
+}
+
+window.createStore = createStore;
+</script>
+</head>
+<body>
+
+<h1>إنشاء متجر جديد</h1>
+
+<form onsubmit="createStore(event)">
+  <input id="storeName" type="text" placeholder="اسم المتجر" required>
+  <input id="storeEmail" type="email" placeholder="البريد الإلكتروني" required>
+  <textarea id="storeDesc" placeholder="وصف المتجر" required></textarea>
+  <button type="submit">إنشاء المتجر</button>
+</form>
+
+</body>
+</html>
