@@ -86,4 +86,32 @@ document.querySelector(".facebook-btn").onclick = () => {
   });
 </script>
 <a href="login.html">تسجيل/دخول</a>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "YOUR_KEY",
+  authDomain: "algerian-market.firebaseapp.com",
+  projectId: "algerian-market",
+  storageBucket: "algerian-market.appspot.com",
+  messagingSenderId: "494532117214",
+  appId: "1:494532117214:web:c91c0b3d4e96589e24384f"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+
+document.getElementById("googleLoginBtn").addEventListener("click", () => {
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      alert("تم تسجيل الدخول باسم: " + result.user.displayName);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+});
+</script>
+<button id="googleLoginBtn">تسجيل الدخول عبر Google</button>
 
