@@ -73,3 +73,24 @@ if (querySnapshot.empty) {
     </p>
   `;
 }
+<form id="storeForm">
+  <input placeholder="اسم المتجر" required>
+  <textarea placeholder="وصف المتجر"></textarea>
+  <button>إنشاء المتجر</button>
+</form>
+
+<script type="module">
+import { db, auth } from "./firebase.js";
+import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
+
+document.getElementById("storeForm").onsubmit = async (e) => {
+  e.preventDefault();
+  await addDoc(collection(db, "stores"), {
+    name: e.target[0].value,
+    desc: e.target[1].value,
+    userId: auth.currentUser.uid,
+    createdAt: serverTimestamp()
+  });
+  alert("تم إنشاء المتجر");
+};
+</script>

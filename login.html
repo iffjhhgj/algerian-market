@@ -95,3 +95,14 @@ body {
 
 </body>
 </html>
+<button id="googleLogin">تسجيل الدخول بجوجل</button>
+
+<script type="module">
+import { auth, provider } from "./firebase.js";
+import { signInWithPopup } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+
+document.getElementById("googleLogin").onclick = async () => {
+  const result = await signInWithPopup(auth, provider);
+  alert("مرحبًا " + result.user.displayName);
+};
+</script>

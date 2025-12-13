@@ -63,3 +63,23 @@ document.getElementById("productForm").addEventListener("submit", e => {
 </script>
 </body>
 </html>
+<form id="productForm">
+  <input placeholder="اسم المنتج">
+  <input placeholder="السعر">
+  <button>إضافة</button>
+</form>
+
+<script type="module">
+import { db, auth } from "./firebase.js";
+import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
+
+document.getElementById("productForm").onsubmit = async (e) => {
+  e.preventDefault();
+  await addDoc(collection(db, "products"), {
+    name: e.target[0].value,
+    price: e.target[1].value,
+    userId: auth.currentUser.uid
+  });
+  alert("تمت إضافة المنتج");
+};
+</script>
