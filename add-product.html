@@ -1,85 +1,38 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>إضافة منتج</title>
-<link rel="stylesheet" href="styles.css">
-<style>
-body {
-  font-family: Arial, sans-serif;
-  background: #f2f2f2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-}
-.product-container {
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  width: 90%;
-  max-width: 400px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
-}
-input, textarea {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 16px;
-}
-button {
-  width: 100%;
-  padding: 12px;
-  background: #0a84ff;
-  color: white;
-  font-size: 18px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
-button:hover { background: #006fe6; }
-h1 { text-align: center; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>أضف منتجك - الجريان ماركت</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div class="product-container">
-  <h1>إضافة منتج جديد</h1>
-  <form id="productForm">
-    <input type="text" placeholder="اسم المنتج" required>
-    <input type="number" placeholder="السعر" required>
-    <textarea placeholder="وصف المنتج" required></textarea>
-    <button type="submit">إضافة المنتج</button>
-  </form>
-</div>
-<script>
-document.getElementById("productForm").addEventListener("submit", e => {
-  e.preventDefault();
-  alert("تم إضافة المنتج (تجريبي)");
-});
-</script>
+
+  <!-- ===== الهيدر ===== -->
+  <header class="header">
+    <div class="logo">
+      <img src="logo.png" alt="الجريان ماركت">
+    </div>
+  </header>
+
+  <!-- ===== Hero Section ===== -->
+  <section class="hero hero-add-product">
+    <h1>أضف منتجك الجديد</h1>
+    <p>شارك منتجاتك مع جميع المستخدمين بسهولة</p>
+  </section>
+
+  <!-- ===== نموذج إضافة المنتج ===== -->
+  <section class="form-section">
+    <div class="form-card">
+      <form id="productForm">
+        <input type="text" placeholder="اسم المنتج" required>
+        <input type="number" placeholder="السعر" required>
+        <textarea placeholder="وصف المنتج" required></textarea>
+        <input type="file" accept="image/*" required>
+        <button type="submit">إضافة المنتج</button>
+      </form>
+    </div>
+  </section>
+
 </body>
 </html>
-<form id="productForm">
-  <input placeholder="اسم المنتج">
-  <input placeholder="السعر">
-  <button>إضافة</button>
-</form>
-
-<script type="module">
-import { db, auth } from "./firebase.js";
-import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
-
-document.getElementById("productForm").onsubmit = async (e) => {
-  e.preventDefault();
-  await addDoc(collection(db, "products"), {
-    name: e.target[0].value,
-    price: e.target[1].value,
-    userId: auth.currentUser.uid
-  });
-  alert("تمت إضافة المنتج");
-};
-</script>

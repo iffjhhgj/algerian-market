@@ -1,108 +1,28 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>تسجيل الدخول - الجريان ماركت</title>
-<link rel="stylesheet" href="styles.css">
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
-
-const firebaseConfig = {
-  apiKey: "YOUR_KEY",
-  authDomain: "algerian-market.firebaseapp.com",
-  projectId: "algerian-market",
-  storageBucket: "algerian-market.appspot.com",
-  messagingSenderId: "494532117214",
-  appId: "1:494532117214:web:c91c0b3d4e96589e24384f"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const provider = new GoogleAuthProvider();
-
-window.googleLogin = () => {
-  signInWithPopup(auth, provider)
-    .then(result => {
-      document.getElementById("welcomeMsg").innerText = `مرحبًا ${result.user.displayName}!`;
-    })
-    .catch(() => alert("فشل تسجيل الدخول"));
-};
-</script>
-<style>
-body {
-  font-family: 'Arial', sans-serif;
-  background: linear-gradient(to bottom right, #0a84ff, #000);
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-.login-card {
-  background: #ffffff;
-  color: #000;
-  padding: 40px 30px;
-  border-radius: 15px;
-  width: 90%;
-  max-width: 400px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-  text-align: center;
-}
-.login-card h1 {
-  margin-bottom: 30px;
-  font-size: 28px;
-}
-.google-btn {
-  background: #4285F4;
-  color: white;
-  border: none;
-  padding: 12px 25px;
-  font-size: 18px;
-  border-radius: 8px;
-  cursor: pointer;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.google-btn img {
-  height: 24px;
-  margin-right: 10px;
-}
-.google-btn:hover {
-  background: #357ae8;
-}
-#welcomeMsg {
-  margin-top: 20px;
-  color: green;
-  font-weight: bold;
-  font-size: 18px;
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تسجيل/دخول - الجريان ماركت</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<div class="login-card">
-  <h1>تسجيل الدخول</h1>
-  <button class="google-btn" onclick="googleLogin()">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="G Logo">
-    تسجيل الدخول عبر Google
-  </button>
-  <p id="welcomeMsg"></p>
-</div>
+  <!-- ===== الهيدر ===== -->
+  <header class="header">
+    <div class="logo">
+      <img src="logo.png" alt="الجريان ماركت">
+    </div>
+  </header>
 
-</body>
-</html>
-<button id="googleLogin">تسجيل الدخول بجوجل</button>
+  <!-- ===== Hero Section ===== -->
+  <section class="hero hero-login">
+    <h1>تسجيل الدخول</h1>
+    <p>سجل الدخول عبر حساب Google للوصول إلى حسابك</p>
+  </section>
 
-<script type="module">
-import { auth, provider } from "./firebase.js";
-import { signInWithPopup } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
-
-document.getElementById("googleLogin").onclick = async () => {
-  const result = await signInWithPopup(auth, provider);
-  alert("مرحبًا " + result.user.displayName);
-};
-</script>
+  <!-- ===== نموذج تسجيل الدخول ===== -->
+  <section class="form-section">
+    <div class="form-card">
+      <button id="googleLogin" class="google-btn">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="G Logo">
